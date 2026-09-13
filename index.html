@@ -134,6 +134,8 @@
     box-shadow: 0 8px 22px rgba(0,0,0,0.45), 0 0 0 4px rgba(167,139,250,0.15);
   }
   .hub-node svg { width: 24px; height: 24px; pointer-events: none; }
+  .hub-node.hub-node--logo { background: #f4f1fb; padding: 8px; }
+  .hub-node.hub-node--logo img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
   .hub-node.n-ig { left: 8%; top: 18%; }
   .hub-node.n-tt { left: 8%; top: 50%; }
   .hub-node.n-yt { left: 8%; top: 82%; }
@@ -212,6 +214,8 @@
     display: flex; align-items: center; justify-content: center;
     font-family: var(--mono); font-weight: 700; font-size: 15px; color: #100c1f;
   }
+  .source-badge.source-badge--logo { background: #f4f1fb; padding: 6px; }
+  .source-badge.source-badge--logo img { width: 100%; height: 100%; object-fit: contain; }
   .source-name { font-weight: 600; font-size: 14.5px; color: var(--text); }
   .source-tag { font-size: 12px; color: var(--text-faint); }
   .source-arrow { margin-left: auto; color: var(--text-faint); font-size: 15px; }
@@ -272,9 +276,9 @@
     <a class="hub-node n-yt" href="https://www.youtube.com/@PyreFitness" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube">
       <svg viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="3.5" fill="#ff3b30"/><path d="M10.5 9.3v5.4L15.3 12z" fill="#fff"/></svg>
     </a>
-    <a class="hub-node n-a" href="https://peptira.com/?ref=PYRE" target="_blank" rel="noopener noreferrer" aria-label="Peptira" title="Peptira"><span class="letter">P</span></a>
-    <a class="hub-node n-b" href="https://ruo.bio/?ref=PYRE" target="_blank" rel="noopener noreferrer" aria-label="RUO.bio" title="RUO.bio"><span class="letter">R</span></a>
-    <a class="hub-node n-c" href="https://aminowellusa.com/my-account/" target="_blank" rel="noopener noreferrer" aria-label="AminoWellUSA" title="AminoWellUSA"><span class="letter">A</span></a>
+    <a class="hub-node hub-node--logo n-a" href="https://peptira.com/?ref=PYRE" target="_blank" rel="noopener noreferrer" aria-label="Peptira" title="Peptira"><img src="logos/peptira.png" alt="Peptira" loading="lazy"></a>
+    <a class="hub-node hub-node--logo n-b" href="https://ruo.bio/?ref=PYRE" target="_blank" rel="noopener noreferrer" aria-label="RUO.bio" title="RUO.bio"><img src="logos/ruo.png" alt="RUO.bio" loading="lazy"></a>
+    <a class="hub-node hub-node--logo n-c" href="https://aminowellusa.com/my-account/" target="_blank" rel="noopener noreferrer" aria-label="AminoWellUSA" title="AminoWellUSA"><img src="logos/aminowell.png" alt="AminoWellUSA" loading="lazy"></a>
 
     <div class="hub-core"><span>PYRE</span></div>
   </div>
@@ -300,17 +304,17 @@
   </div>
   <div class="sources-grid">
     <a class="source-card" href="https://peptira.com/?ref=PYRE" target="_blank" rel="noopener noreferrer">
-      <span class="source-badge">P</span>
+      <span class="source-badge source-badge--logo"><img src="logos/peptira.png" alt="Peptira" loading="lazy"></span>
       <span><span class="source-name">Peptira</span><br><span class="source-tag">Peptide sourcing</span></span>
       <span class="source-arrow">→</span>
     </a>
     <a class="source-card" href="https://ruo.bio/?ref=PYRE" target="_blank" rel="noopener noreferrer">
-      <span class="source-badge">R</span>
+      <span class="source-badge source-badge--logo"><img src="logos/ruo.png" alt="RUO.bio" loading="lazy"></span>
       <span><span class="source-name">RUO.bio</span><br><span class="source-tag">Peptide sourcing</span></span>
       <span class="source-arrow">→</span>
     </a>
     <a class="source-card" href="https://aminowellusa.com/my-account/" target="_blank" rel="noopener noreferrer">
-      <span class="source-badge">A</span>
+      <span class="source-badge source-badge--logo"><img src="logos/aminowell.png" alt="AminoWellUSA" loading="lazy"></span>
       <span><span class="source-name">AminoWellUSA</span><br><span class="source-tag">Peptide sourcing</span></span>
       <span class="source-arrow">→</span>
     </a>
