@@ -126,8 +126,14 @@
     border-radius: 50%; background: var(--surface); border: 1px solid var(--border-bright);
     display: flex; align-items: center; justify-content: center;
     box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+    transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
   }
-  .hub-node svg { width: 24px; height: 24px; }
+  a.hub-node:hover, a.hub-node:focus-visible {
+    transform: scale(1.1);
+    border-color: var(--accent);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.45), 0 0 0 4px rgba(167,139,250,0.15);
+  }
+  .hub-node svg { width: 24px; height: 24px; pointer-events: none; }
   .hub-node.n-ig { left: 8%; top: 18%; }
   .hub-node.n-tt { left: 8%; top: 50%; }
   .hub-node.n-yt { left: 8%; top: 82%; }
@@ -247,8 +253,8 @@
     <a class="btn-secondary" href="#sources">See vetted sources ↓</a>
   </div>
 
-  <div class="hub-wrap" aria-hidden="true">
-    <svg class="hub-svg" viewBox="0 0 700 360" preserveAspectRatio="xMidYMid meet">
+  <div class="hub-wrap">
+    <svg class="hub-svg" viewBox="0 0 700 360" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
       <path class="hub-line" d="M62,65 C210,65 210,180 350,180" />
       <path class="hub-line" d="M62,180 L350,180" />
       <path class="hub-line" d="M62,295 C210,295 210,180 350,180" />
@@ -257,18 +263,18 @@
       <path class="hub-line" d="M638,295 C490,295 490,180 350,180" />
     </svg>
 
-    <div class="hub-node n-ig" title="Instagram">
+    <a class="hub-node n-ig" href="https://www.instagram.com/pyrelifts" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
       <svg viewBox="0 0 24 24" fill="none" stroke="#e1306c" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1.1" fill="#e1306c" stroke="none"/></svg>
-    </div>
-    <div class="hub-node n-tt" title="TikTok">
+    </a>
+    <a class="hub-node n-tt" href="https://www.tiktok.com/@pyrelifts2" target="_blank" rel="noopener noreferrer" aria-label="TikTok" title="TikTok">
       <svg viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="1.8"><path d="M15 4v9.5a3.5 3.5 0 1 1-3-3.46"/><path d="M15 4a4.5 4.5 0 0 0 4.5 4.5"/></svg>
-    </div>
-    <div class="hub-node n-yt" title="YouTube">
+    </a>
+    <a class="hub-node n-yt" href="https://www.youtube.com/@PyreFitness" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube">
       <svg viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="3.5" fill="#ff3b30"/><path d="M10.5 9.3v5.4L15.3 12z" fill="#fff"/></svg>
-    </div>
-    <div class="hub-node n-a" title="Peptira"><span class="letter">P</span></div>
-    <div class="hub-node n-b" title="RUO.bio"><span class="letter">R</span></div>
-    <div class="hub-node n-c" title="ModernAminos"><span class="letter">M</span></div>
+    </a>
+    <a class="hub-node n-a" href="https://peptira.com/?ref=PYRE" target="_blank" rel="noopener noreferrer" aria-label="Peptira" title="Peptira"><span class="letter">P</span></a>
+    <a class="hub-node n-b" href="https://ruo.bio/?ref=PYRE" target="_blank" rel="noopener noreferrer" aria-label="RUO.bio" title="RUO.bio"><span class="letter">R</span></a>
+    <a class="hub-node n-c" href="https://modernaminos.com/?ref=pyre" target="_blank" rel="noopener noreferrer" aria-label="ModernAminos" title="ModernAminos"><span class="letter">M</span></a>
 
     <div class="hub-core"><span>PYRE</span></div>
   </div>
