@@ -118,55 +118,6 @@
   }
   .btn-secondary:hover { border-color: var(--accent); background: rgba(167,139,250,0.06); }
 
-  /* ---- hub graphic ---- */
-  .hub-wrap { position: relative; max-width: 620px; margin: 52px auto 0; aspect-ratio: 700 / 360; }
-  .hub-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-  .hub-line { fill: none; stroke: var(--border-bright); stroke-width: 1.5; opacity: 0.55; }
-
-  .hub-node {
-    position: absolute; width: 66px; height: 66px; margin-left: -33px; margin-top: -33px;
-    border-radius: 50%; background: var(--surface); border: 1px solid var(--border-bright);
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.35);
-    transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
-  }
-  a.hub-node:hover, a.hub-node:focus-visible {
-    transform: scale(1.1);
-    border-color: var(--accent);
-    box-shadow: 0 8px 22px rgba(0,0,0,0.45), 0 0 0 4px rgba(167,139,250,0.15);
-  }
-  .hub-node svg { width: 32px; height: 32px; pointer-events: none; }
-  .hub-node.hub-node--logo { background: #f4f1fb; padding: 10px; }
-  .hub-node.hub-node--logo img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
-  .hub-node.n-ig { left: 8%; top: 18%; }
-  .hub-node.n-tt { left: 8%; top: 50%; }
-  .hub-node.n-yt { left: 8%; top: 82%; }
-  .hub-node.n-a { left: 92%; top: 18%; }
-  .hub-node.n-b { left: 92%; top: 50%; }
-  .hub-node.n-c { left: 92%; top: 82%; }
-  .hub-node .letter {
-    font-family: var(--mono); font-weight: 700; font-size: 15px; color: var(--accent-bright);
-  }
-
-  .hub-core {
-    position: absolute; left: 50%; top: 50%; width: 112px; height: 112px;
-    margin-left: -56px; margin-top: -56px; border-radius: 50%;
-    background: radial-gradient(circle at 35% 30%, var(--accent-bright), var(--accent-dim) 70%);
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 0 0 8px rgba(167,139,250,0.10), 0 0 40px var(--accent-glow);
-    animation: corepulse 3s ease-in-out infinite;
-  }
-  @keyframes corepulse {
-    0%,100% { box-shadow: 0 0 0 8px rgba(167,139,250,0.10), 0 0 40px var(--accent-glow); }
-    50% { box-shadow: 0 0 0 14px rgba(167,139,250,0.06), 0 0 56px var(--accent-glow); }
-  }
-  .hub-core span { font-family: var(--mono); font-weight: 700; font-size: 13px; letter-spacing: 0.04em; color: #100c1f; }
-
-  @media (max-width: 640px) { .hub-wrap { display: none; } }
-
-  .hub-caption { text-align: center; font-family: var(--mono); font-size: 11px; color: var(--text-faint); margin-top: 8px; }
-  @media (max-width: 640px) { .hub-caption { display: none; } }
-
   /* ---- skool spotlight ---- */
   .skool-card {
     max-width: 880px; margin: 56px auto 0; padding: 34px 30px;
@@ -198,15 +149,14 @@
   .section-head p { color: var(--text-dim); font-size: 14px; margin: 0; }
 
   .sources-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+    display: flex; flex-direction: column; gap: 12px;
+    max-width: 560px; margin: 0 auto;
   }
-  @media (max-width: 700px) { .sources-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 460px) { .sources-grid { grid-template-columns: 1fr; } }
 
   .source-card {
-    display: flex; align-items: center; gap: 12px;
+    display: flex; align-items: center; gap: 14px;
     background: var(--surface); border: 1px solid var(--border);
-    border-radius: 14px; padding: 16px;
+    border-radius: 16px; padding: 16px 20px;
     transition: border-color 0.15s, transform 0.15s;
   }
   .source-card:hover { border-color: var(--accent-dim); transform: translateY(-1px); }
@@ -258,33 +208,6 @@
     <a class="btn-primary" href="https://www.skool.com/peptides-101-9175/about?ref=94d158cb9b9c4572948aa9f240f013f4" target="_blank" rel="noopener noreferrer">All my guides, writeups and protocols →</a>
     <a class="btn-secondary" href="#sources">See vetted sources ↓</a>
   </div>
-
-  <div class="hub-wrap">
-    <svg class="hub-svg" viewBox="0 0 700 360" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-      <path class="hub-line" d="M62,65 C210,65 210,180 350,180" />
-      <path class="hub-line" d="M62,180 L350,180" />
-      <path class="hub-line" d="M62,295 C210,295 210,180 350,180" />
-      <path class="hub-line" d="M638,65 C490,65 490,180 350,180" />
-      <path class="hub-line" d="M638,180 L350,180" />
-      <path class="hub-line" d="M638,295 C490,295 490,180 350,180" />
-    </svg>
-
-    <a class="hub-node n-ig" href="https://www.instagram.com/pyrelifts" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#e1306c" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1.1" fill="#e1306c" stroke="none"/></svg>
-    </a>
-    <a class="hub-node n-tt" href="https://www.tiktok.com/@pyrelifts2" target="_blank" rel="noopener noreferrer" aria-label="TikTok" title="TikTok">
-      <svg viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="1.8"><path d="M15 4v9.5a3.5 3.5 0 1 1-3-3.46"/><path d="M15 4a4.5 4.5 0 0 0 4.5 4.5"/></svg>
-    </a>
-    <a class="hub-node n-yt" href="https://www.youtube.com/@PyreFitness" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube">
-      <svg viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="3.5" fill="#ff3b30"/><path d="M10.5 9.3v5.4L15.3 12z" fill="#fff"/></svg>
-    </a>
-    <a class="hub-node hub-node--logo n-a" href="https://peptira.com/?ref=PYRE" target="_blank" rel="noopener noreferrer" aria-label="Peptira" title="Peptira"><img src="logos/peptira.png" alt="Peptira" loading="lazy"></a>
-    <a class="hub-node hub-node--logo n-b" href="https://ruo.bio/?ref=PYRE" target="_blank" rel="noopener noreferrer" aria-label="RUO.bio" title="RUO.bio"><img src="logos/ruo.png" alt="RUO.bio" loading="lazy"></a>
-    <a class="hub-node hub-node--logo n-c" href="https://aminowellusa.com/my-account/" target="_blank" rel="noopener noreferrer" aria-label="AminoWellUSA" title="AminoWellUSA"><img src="logos/aminowell.png" alt="AminoWellUSA" loading="lazy"></a>
-
-    <div class="hub-core"><span>PYRE</span></div>
-  </div>
-  <div class="hub-caption">Content channels + sourcing partners, all pointing back to one place</div>
 
   <div class="skool-card">
     <div class="kicker">Start here</div>
