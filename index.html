@@ -189,9 +189,10 @@
 
   /* ---- promotions ---- */
   .promos-grid {
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
-    max-width: 720px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    max-width: 1000px; margin: 0 auto;
   }
+  @media (max-width: 860px) { .promos-grid { grid-template-columns: repeat(2, 1fr); max-width: 720px; } }
   @media (max-width: 600px) { .promos-grid { grid-template-columns: 1fr; max-width: 420px; } }
 
   .promo-card {
@@ -201,6 +202,36 @@
   }
   .promo-card:hover { border-color: var(--accent-dim); transform: translateY(-2px); }
   .promo-card img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; background: var(--bg-raised); }
+
+  .promo-banner {
+    width: 100%; aspect-ratio: 4 / 5;
+    background:
+      radial-gradient(circle at 24% 18%, rgba(167,139,250,0.35), transparent 55%),
+      radial-gradient(circle at 80% 85%, rgba(124,92,214,0.30), transparent 55%),
+      var(--bg-raised);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 14px; padding: 20px; text-align: center;
+  }
+  .promo-banner .promo-banner-mark {
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+  }
+  .promo-banner .promo-banner-mark span {
+    font-family: var(--mono); font-weight: 700; font-size: 22px; letter-spacing: 0.04em;
+    color: var(--text);
+  }
+  .promo-banner .promo-banner-mark .bar {
+    width: 56px; height: 3px; border-radius: 2px;
+    background: linear-gradient(90deg, #ff4d4d, #7c3aed);
+  }
+  .promo-banner .promo-banner-pct {
+    font-size: 54px; font-weight: 800; line-height: 1;
+    background: linear-gradient(135deg, var(--accent-bright), var(--gold));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .promo-banner .promo-banner-label {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--text-dim);
+  }
   .promo-card-body { padding: 14px 16px 16px; }
   .promo-card-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
   .promo-name { font-weight: 600; font-size: 14.5px; color: var(--text); }
@@ -269,6 +300,21 @@
     <p>Live sales from my sourcing partners — updated as they drop.</p>
   </div>
   <div class="promos-grid">
+    <a class="promo-card" href="https://ruo.bio/?ref=PYRE" target="_blank" rel="noopener noreferrer">
+      <div class="promo-banner">
+        <div class="promo-banner-mark"><span>RUO</span><div class="bar"></div></div>
+        <div class="promo-banner-pct">20% OFF</div>
+        <div class="promo-banner-label">Sitewide</div>
+      </div>
+      <div class="promo-card-body">
+        <div class="promo-card-top">
+          <span class="promo-name">RUO.bio</span>
+          <span class="promo-expiry">Today only</span>
+        </div>
+        <p class="promo-desc">20% off sitewide — today only.</p>
+        <span class="promo-cta">Shop the sale →</span>
+      </div>
+    </a>
     <a class="promo-card" href="https://peptira.com/?ref=PYRE" target="_blank" rel="noopener noreferrer">
       <img src="promos/peptira-bogo.jpg" alt="Peptira Buy One Get One promotion on Reta-3, Tirz-2, Sema-1 and Survodutide" loading="lazy">
       <div class="promo-card-body">
