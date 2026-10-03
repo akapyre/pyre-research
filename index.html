@@ -189,10 +189,10 @@
 
   /* ---- promotions ---- */
   .promos-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 300px));
+    justify-content: center; gap: 16px;
     max-width: 1000px; margin: 0 auto;
   }
-  @media (max-width: 860px) { .promos-grid { grid-template-columns: repeat(2, 1fr); max-width: 720px; } }
   @media (max-width: 600px) { .promos-grid { grid-template-columns: 1fr; max-width: 420px; } }
 
   .promo-card {
@@ -300,32 +300,6 @@
     <p>Live sales from my sourcing partners — updated as they drop.</p>
   </div>
   <div class="promos-grid">
-    <a class="promo-card" href="https://ruo.bio/?ref=PYRE" target="_blank" rel="noopener noreferrer">
-      <div class="promo-banner">
-        <div class="promo-banner-mark"><span>RUO</span><div class="bar"></div></div>
-        <div class="promo-banner-pct">20% OFF</div>
-        <div class="promo-banner-label">Sitewide</div>
-      </div>
-      <div class="promo-card-body">
-        <div class="promo-card-top">
-          <span class="promo-name">RUO.bio</span>
-          <span class="promo-expiry">Today only</span>
-        </div>
-        <p class="promo-desc">20% off sitewide — today only.</p>
-        <span class="promo-cta">Shop the sale →</span>
-      </div>
-    </a>
-    <a class="promo-card" href="https://peptira.com/?ref=PYRE" target="_blank" rel="noopener noreferrer">
-      <img src="promos/peptira-bogo.jpg" alt="Peptira Buy One Get One promotion on Reta-3, Tirz-2, Sema-1 and Survodutide" loading="lazy">
-      <div class="promo-card-body">
-        <div class="promo-card-top">
-          <span class="promo-name">Peptira</span>
-          <span class="promo-expiry">Ends Oct 2</span>
-        </div>
-        <p class="promo-desc">Buy one get one free on Reta-3, Tirz-2, Sema-1 &amp; Survodutide. All sizes included.</p>
-        <span class="promo-cta">Shop the sale →</span>
-      </div>
-    </a>
     <a class="promo-card" href="https://skinbyrender.com/" target="_blank" rel="noopener noreferrer">
       <img src="promos/skinbyrender-fall-clearout.jpg" alt="Skinbyrender Fall Clear-Out promotion, up to 40% off" loading="lazy">
       <div class="promo-card-body">
