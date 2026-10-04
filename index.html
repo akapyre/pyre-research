@@ -232,6 +232,15 @@
     font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
     color: var(--text-dim);
   }
+  .promo-banner .promo-banner-logo-img { width: 76px; height: 76px; }
+  .promo-banner .promo-banner-logo-img img { width: 100%; height: 100%; object-fit: contain; }
+  .promo-banner .promo-banner-code {
+    font-family: var(--mono); font-weight: 700; font-size: 13px; letter-spacing: 0.04em;
+    color: var(--text);
+    background: rgba(255,255,255,0.06); border: 1px solid var(--border-bright);
+    padding: 5px 12px; border-radius: 999px;
+  }
+  .promo-banner .promo-banner-code b { color: var(--accent-bright); }
   .promo-card-body { padding: 14px 16px 16px; }
   .promo-card-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
   .promo-name { font-weight: 600; font-size: 14.5px; color: var(--text); }
@@ -300,6 +309,21 @@
     <p>Live sales from my sourcing partners — updated as they drop.</p>
   </div>
   <div class="promos-grid">
+    <a class="promo-card" href="https://modifiedaminos.shop/?ref=imhecohr" target="_blank" rel="noopener noreferrer">
+      <div class="promo-banner">
+        <div class="promo-banner-logo-img"><img src="logos/modifiedaminos.png" alt="Modified Aminos" loading="lazy"></div>
+        <div class="promo-banner-pct">20% OFF</div>
+        <div class="promo-banner-code">Code <b>PYRE</b></div>
+      </div>
+      <div class="promo-card-body">
+        <div class="promo-card-top">
+          <span class="promo-name">Modified Aminos</span>
+          <span class="promo-expiry">Code PYRE</span>
+        </div>
+        <p class="promo-desc">20% off sitewide with code PYRE at checkout.</p>
+        <span class="promo-cta">Shop the sale →</span>
+      </div>
+    </a>
     <a class="promo-card" href="https://skinbyrender.com/" target="_blank" rel="noopener noreferrer">
       <img src="promos/skinbyrender-fall-clearout.jpg" alt="Skinbyrender Fall Clear-Out promotion, up to 40% off" loading="lazy">
       <div class="promo-card-body">
