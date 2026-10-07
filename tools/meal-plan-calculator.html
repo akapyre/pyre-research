@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meal Plan &amp; Macro Calculator — PYRE</title>
+<meta name="description" content="Calculate your maintenance calories, cut/bulk targets, and macros (protein, carbs, fat) based on your stats and goal.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230a0913'/%3E%3Ctext x='50' y='68' font-family='IBM Plex Mono, monospace' font-weight='700' font-size='56' fill='%23c4b5fd' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap');
+
+  :root {
+    --bg: #0a0913;
+    --bg-raised: #13111f;
+    --surface: #17142a;
+    --surface-2: #1d1936;
+    --border: #2b2547;
+    --border-bright: #4c3f82;
+    --text: #ece9f7;
+    --text-dim: #a79fc9;
+    --text-faint: #6f6693;
+    --accent: #a78bfa;
+    --accent-bright: #c4b5fd;
+    --accent-dim: #7c5cd6;
+    --accent-glow: rgba(167, 139, 250, 0.35);
+    --gold: #facc7d;
+    --alert: #ff9966;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'Inter', sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    margin: 0;
+    line-height: 1.5;
+    background:
+      radial-gradient(circle at 18% 6%, rgba(167, 139, 250, 0.16), transparent 42%),
+      radial-gradient(circle at 88% 20%, rgba(124, 92, 214, 0.14), transparent 48%),
+      var(--bg);
+  }
+
+  a { color: var(--accent-bright); text-decoration: none; }
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .nav {
+    max-width: 760px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; padding: 22px 20px 0;
+  }
+  .nav-brand { font-family: var(--mono); font-weight: 700; font-size: 17px; letter-spacing: 0.04em; color: var(--text); }
+  .nav-brand span { color: var(--accent-bright); }
+  .nav-back {
+    font-family: var(--mono); font-size: 12.5px; color: var(--text-dim);
+    border: 1px solid var(--border-bright); padding: 8px 14px; border-radius: 999px;
+  }
+  .nav-back:hover { color: var(--text); text-decoration: none; border-color: var(--accent); }
+
+  .wrap { max-width: 640px; margin: 0 auto; padding: 0 20px 80px; }
+
+  .page-head { text-align: center; padding: 36px 0 28px; }
+  .page-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.03em;
+    color: var(--accent-bright);
+    background: rgba(167,139,250,0.08);
+    border: 1px solid var(--border-bright);
+    padding: 7px 14px; border-radius: 999px;
+  }
+  .page-head h1 {
+    font-size: clamp(26px, 5vw, 36px); line-height: 1.15; font-weight: 800;
+    margin: 18px 0 10px;
+  }
+  .page-head p { color: var(--text-dim); font-size: 15px; max-width: 480px; margin: 0 auto; }
+
+  .disclaimer {
+    display: flex; gap: 10px; align-items: flex-start;
+    background: rgba(255,153,102,0.07); border: 1px solid rgba(255,153,102,0.35);
+    border-radius: 14px; padding: 14px 16px; margin-bottom: 28px;
+    font-size: 12.5px; color: var(--text-dim); line-height: 1.5;
+  }
+  .disclaimer b { color: var(--alert); }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 20px; padding: 26px 24px;
+  }
+
+  .field { margin-bottom: 18px; }
+  .field label {
+    display: block; font-family: var(--mono); font-size: 11px; text-transform: uppercase;
+    letter-spacing: 0.05em; color: var(--text-dim); margin-bottom: 8px;
+  }
+  .field-row { display: flex; gap: 10px; }
+  .field-row .field { flex: 1; margin-bottom: 0; }
+
+  input[type="number"], select {
+    width: 100%; background: var(--bg-raised); border: 1px solid var(--border);
+    color: var(--text); font-family: var(--sans); font-size: 15px; font-weight: 600;
+    padding: 12px 14px; border-radius: 10px; appearance: none;
+  }
+  select { background-image: linear-gradient(45deg, transparent 50%, var(--text-dim) 50%), linear-gradient(135deg, var(--text-dim) 50%, transparent 50%); background-position: calc(100% - 18px) center, calc(100% - 13px) center; background-size: 5px 5px, 5px 5px; background-repeat: no-repeat; padding-right: 32px; }
+
+  .toggle-row { display: flex; gap: 8px; margin-bottom: 18px; }
+  .toggle-btn {
+    flex: 1; font-family: var(--mono); font-size: 12px; font-weight: 600; text-align: center;
+    padding: 10px; border-radius: 10px; border: 1px solid var(--border); color: var(--text-dim);
+    background: var(--bg-raised); cursor: pointer; transition: border-color 0.15s, color 0.15s, background 0.15s;
+  }
+  .toggle-btn.active { border-color: var(--accent-dim); color: #100c1f; background: linear-gradient(135deg, var(--accent-bright), var(--accent-dim)); }
+
+  .divider { height: 1px; background: var(--border); margin: 24px 0; }
+
+  .results { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .result-tile {
+    background: var(--bg-raised); border: 1px solid var(--border);
+    border-radius: 14px; padding: 16px; text-align: center;
+  }
+  .result-tile.wide { grid-column: 1 / -1; }
+  .result-tile .rt-label {
+    font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em;
+    color: var(--text-faint); margin-bottom: 6px;
+  }
+  .result-tile .rt-value {
+    font-size: 24px; font-weight: 800; line-height: 1.1;
+    background: linear-gradient(135deg, var(--accent-bright), var(--gold));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .result-tile .rt-value .unit { font-size: 13px; font-weight: 600; margin-left: 2px; -webkit-text-fill-color: var(--text-dim); }
+  .result-tile.hero .rt-value { font-size: 34px; }
+  .result-tile.hero .rt-label { color: var(--accent-bright); }
+
+  .how-it-works {
+    margin-top: 20px; font-size: 12.5px; color: var(--text-faint);
+    font-family: var(--mono); line-height: 1.7;
+  }
+  .how-it-works b { color: var(--text-dim); }
+
+  .skool-plug {
+    margin-top: 28px; text-align: center; padding: 20px;
+    background: linear-gradient(145deg, rgba(167,139,250,0.14), rgba(124,92,214,0.05));
+    border: 1px solid var(--border-bright); border-radius: 16px;
+  }
+  .skool-plug p { color: var(--text-dim); font-size: 13.5px; margin: 0 0 14px; }
+  .btn-primary {
+    display: inline-block;
+    font-family: var(--sans); font-weight: 700; font-size: 14px; color: #100c1f;
+    background: linear-gradient(135deg, var(--accent-bright), var(--accent-dim));
+    padding: 12px 22px; border-radius: 999px; box-shadow: 0 8px 26px var(--accent-glow);
+    white-space: nowrap;
+  }
+
+  footer {
+    margin: 50px auto 0; max-width: 640px; padding: 20px 20px 0;
+    border-top: 1px solid var(--border);
+    font-family: var(--mono); font-size: 11px; color: var(--text-faint); text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">PYRE<span>.</span></div>
+  <a class="nav-back" href="../index.html">← Back to PYRE</a>
+</nav>
+
+<div class="wrap">
+  <div class="page-head">
+    <span class="page-badge">🧮 Free tool</span>
+    <h1>Meal Plan &amp; Macro Calculator</h1>
+    <p>Get your maintenance calories, cut/bulk targets, and protein/carb/fat split.</p>
+  </div>
+
+  <div class="disclaimer">
+    <span>⚠️</span>
+    <span><b>Estimates only — not medical or nutrition advice.</b> This uses the Mifflin-St Jeor formula, a standard estimate. Individual needs vary — adjust based on real-world results.</span>
+  </div>
+
+  <div class="card">
+    <label style="display:block; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-dim); margin-bottom: 8px;">Sex</label>
+    <div class="toggle-row">
+      <div class="toggle-btn active" data-sex="male">Male</div>
+      <div class="toggle-btn" data-sex="female">Female</div>
+    </div>
+
+    <label style="display:block; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-dim); margin-bottom: 8px;">Units</label>
+    <div class="toggle-row">
+      <div class="toggle-btn active" data-units="imperial">Imperial (lb / ft+in)</div>
+      <div class="toggle-btn" data-units="metric">Metric (kg / cm)</div>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label for="age">Age (years)</label>
+        <input type="number" id="age" inputmode="numeric" placeholder="e.g. 28" min="0" step="1">
+      </div>
+      <div class="field">
+        <label for="weight" id="weightLabel">Weight (lb)</label>
+        <input type="number" id="weight" inputmode="decimal" placeholder="e.g. 180" min="0" step="any">
+      </div>
+    </div>
+
+    <div class="field-row" id="heightImperialRow">
+      <div class="field">
+        <label for="heightFt">Height (ft)</label>
+        <input type="number" id="heightFt" inputmode="numeric" placeholder="e.g. 5" min="0" step="1">
+      </div>
+      <div class="field">
+        <label for="heightIn">Height (in)</label>
+        <input type="number" id="heightIn" inputmode="numeric" placeholder="e.g. 10" min="0" max="11" step="1">
+      </div>
+    </div>
+    <div class="field" id="heightMetricRow" style="display:none;">
+      <label for="heightCm">Height (cm)</label>
+      <input type="number" id="heightCm" inputmode="decimal" placeholder="e.g. 178" min="0" step="any">
+    </div>
+
+    <div class="field">
+      <label for="activity">Activity level</label>
+      <select id="activity">
+        <option value="1.2">Sedentary — little to no exercise</option>
+        <option value="1.375">Light — exercise 1–3 days/week</option>
+        <option value="1.55" selected>Moderate — exercise 3–5 days/week</option>
+        <option value="1.725">Very active — exercise 6–7 days/week</option>
+        <option value="1.9">Extra active — physical job or 2x/day training</option>
+      </select>
+    </div>
+
+    <label style="display:block; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-dim); margin-bottom: 8px;">Goal</label>
+    <div class="toggle-row">
+      <div class="toggle-btn" data-goal="0.8">Cut</div>
+      <div class="toggle-btn active" data-goal="1">Maintain</div>
+      <div class="toggle-btn" data-goal="1.1">Bulk</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="results">
+      <div class="result-tile hero wide">
+        <div class="rt-label">Target calories</div>
+        <div class="rt-value" id="rTarget">—<span class="unit"> kcal</span></div>
+      </div>
+      <div class="result-tile">
+        <div class="rt-label">BMR</div>
+        <div class="rt-value" id="rBmr">—<span class="unit"> kcal</span></div>
+      </div>
+      <div class="result-tile">
+        <div class="rt-label">Maintenance (TDEE)</div>
+        <div class="rt-value" id="rTdee">—<span class="unit"> kcal</span></div>
+      </div>
+      <div class="result-tile">
+        <div class="rt-label">Protein</div>
+        <div class="rt-value" id="rProtein">—<span class="unit"> g</span></div>
+      </div>
+      <div class="result-tile">
+        <div class="rt-label">Fat</div>
+        <div class="rt-value" id="rFat">—<span class="unit"> g</span></div>
+      </div>
+      <div class="result-tile wide">
+        <div class="rt-label">Carbs</div>
+        <div class="rt-value" id="rCarbs">—<span class="unit"> g</span></div>
+      </div>
+    </div>
+
+    <div class="how-it-works">
+      <b>BMR</b> (Mifflin-St Jeor): 10×kg + 6.25×cm − 5×age ± 5<br>
+      <b>TDEE</b> = BMR × activity multiplier<br>
+      <b>Target</b> = TDEE × goal multiplier (cut −20%, bulk +10%)<br>
+      <b>Protein</b> = 1g/lb bodyweight · <b>Fat</b> = 25% of target calories · <b>Carbs</b> = remainder
+    </div>
+  </div>
+
+  <div class="skool-plug">
+    <p>Want full meal plans and protocols built around your numbers?</p>
+    <a class="btn-primary" href="https://www.skool.com/peptides-101-9175/about?ref=94d158cb9b9c4572948aa9f240f013f4" target="_blank" rel="noopener noreferrer">All my guides on Skool →</a>
+  </div>
+
+  <footer>PYRE — for research &amp; educational purposes only. Not medical advice.</footer>
+</div>
+
+<script>
+  const sexBtns = document.querySelectorAll('.toggle-btn[data-sex]');
+  const unitBtns = document.querySelectorAll('.toggle-btn[data-units]');
+  const goalBtns = document.querySelectorAll('.toggle-btn[data-goal]');
+
+  const ageEl = document.getElementById('age');
+  const weightEl = document.getElementById('weight');
+  const weightLabel = document.getElementById('weightLabel');
+  const heightFtEl = document.getElementById('heightFt');
+  const heightInEl = document.getElementById('heightIn');
+  const heightCmEl = document.getElementById('heightCm');
+  const heightImperialRow = document.getElementById('heightImperialRow');
+  const heightMetricRow = document.getElementById('heightMetricRow');
+  const activityEl = document.getElementById('activity');
+
+  const rBmr = document.getElementById('rBmr');
+  const rTdee = document.getElementById('rTdee');
+  const rTarget = document.getElementById('rTarget');
+  const rProtein = document.getElementById('rProtein');
+  const rFat = document.getElementById('rFat');
+  const rCarbs = document.getElementById('rCarbs');
+
+  let sex = 'male';
+  let units = 'imperial';
+  let goalMultiplier = 1;
+
+  sexBtns.forEach(btn => btn.addEventListener('click', () => {
+    sexBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    sex = btn.dataset.sex;
+    calculate();
+  }));
+
+  unitBtns.forEach(btn => btn.addEventListener('click', () => {
+    unitBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    units = btn.dataset.units;
+    if (units === 'imperial') {
+      heightImperialRow.style.display = 'flex';
+      heightMetricRow.style.display = 'none';
+      weightLabel.textContent = 'Weight (lb)';
+    } else {
+      heightImperialRow.style.display = 'none';
+      heightMetricRow.style.display = 'block';
+      weightLabel.textContent = 'Weight (kg)';
+    }
+    calculate();
+  }));
+
+  goalBtns.forEach(btn => btn.addEventListener('click', () => {
+    goalBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    goalMultiplier = Number(btn.dataset.goal);
+    calculate();
+  }));
+
+  function setResult(el, value, decimals) {
+    const unitHtml = el.querySelector('.unit').outerHTML;
+    if (value === null || !isFinite(value) || isNaN(value)) {
+      el.innerHTML = '—' + unitHtml;
+      return;
+    }
+    el.innerHTML = Math.round(value).toLocaleString('en-US', { maximumFractionDigits: decimals }) + unitHtml;
+  }
+
+  function calculate() {
+    const age = parseFloat(ageEl.value);
+    const weightRaw = parseFloat(weightEl.value);
+    const activityMultiplier = parseFloat(activityEl.value);
+
+    let weightKg = null;
+    let heightCm = null;
+    let weightLb = null;
+
+    if (units === 'imperial') {
+      const ft = parseFloat(heightFtEl.value) || 0;
+      const inch = parseFloat(heightInEl.value) || 0;
+      if (weightRaw > 0) { weightLb = weightRaw; weightKg = weightRaw * 0.453592; }
+      if (ft > 0 || inch > 0) heightCm = (ft * 12 + inch) * 2.54;
+    } else {
+      if (weightRaw > 0) { weightKg = weightRaw; weightLb = weightRaw / 0.453592; }
+      const cm = parseFloat(heightCmEl.value);
+      if (cm > 0) heightCm = cm;
+    }
+
+    const valid = age > 0 && weightKg > 0 && heightCm > 0;
+
+    if (!valid) {
+      [rBmr, rTdee, rTarget, rProtein, rFat, rCarbs].forEach(el => setResult(el, null, 0));
+      return;
+    }
+
+    const bmr = sex === 'male'
+      ? 10 * weightKg + 6.25 * heightCm - 5 * age + 5
+      : 10 * weightKg + 6.25 * heightCm - 5 * age - 161;
+
+    const tdee = bmr * activityMultiplier;
+    const target = tdee * goalMultiplier;
+
+    const proteinG = weightLb * 1;
+    const fatG = (target * 0.25) / 9;
+    const carbsG = Math.max(0, (target - proteinG * 4 - fatG * 9) / 4);
+
+    setResult(rBmr, bmr, 0);
+    setResult(rTdee, tdee, 0);
+    setResult(rTarget, target, 0);
+    setResult(rProtein, proteinG, 0);
+    setResult(rFat, fatG, 0);
+    setResult(rCarbs, carbsG, 0);
+  }
+
+  [ageEl, weightEl, heightFtEl, heightInEl, heightCmEl, activityEl].forEach(el => el.addEventListener('input', calculate));
+  activityEl.addEventListener('change', calculate);
+  calculate();
+</script>
+
+</body>
+</html>
