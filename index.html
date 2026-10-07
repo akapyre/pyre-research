@@ -73,11 +73,22 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
+    row-gap: 12px;
     gap: 16px;
     padding: 22px 20px 0;
   }
   .nav-brand { font-family: var(--mono); font-weight: 700; font-size: 17px; letter-spacing: 0.04em; }
   .nav-brand span { color: var(--accent-bright); }
+  .nav-links {
+    display: flex; align-items: center; gap: 22px;
+    font-family: var(--mono); font-size: 13px;
+  }
+  .nav-links a { color: var(--text-dim); transition: color 0.15s; }
+  .nav-links a:hover { color: var(--text); text-decoration: none; }
+  @media (max-width: 640px) {
+    .nav-links { order: 3; flex-basis: 100%; justify-content: center; gap: 18px; }
+  }
   .nav-cta {
     font-family: var(--sans); font-weight: 600; font-size: 13px;
     color: #100c1f;
@@ -278,6 +289,11 @@
 
 <nav class="nav">
   <div class="nav-brand">PYRE<span>.</span></div>
+  <div class="nav-links">
+    <a href="#promos">Deals</a>
+    <a href="#calculators">Calculators</a>
+    <a href="#sources">Vendors</a>
+  </div>
   <a class="nav-cta" href="https://www.skool.com/peptides-101-9175/about?ref=94d158cb9b9c4572948aa9f240f013f4" target="_blank" rel="noopener noreferrer">Join the Skool →</a>
 </nav>
 
