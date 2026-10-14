@@ -81,13 +81,13 @@
   .nav-brand { font-family: var(--mono); font-weight: 700; font-size: 17px; letter-spacing: 0.04em; }
   .nav-brand span { color: var(--accent-bright); }
   .nav-links {
-    display: flex; align-items: center; gap: 22px;
+    display: flex; align-items: center; flex-wrap: wrap; gap: 10px 22px;
     font-family: var(--mono); font-size: 13px;
   }
-  .nav-links a { color: var(--text-dim); transition: color 0.15s; }
+  .nav-links a { color: var(--text-dim); transition: color 0.15s; white-space: nowrap; }
   .nav-links a:hover { color: var(--text); text-decoration: none; }
   @media (max-width: 640px) {
-    .nav-links { order: 3; flex-basis: 100%; justify-content: center; gap: 18px; }
+    .nav-links { order: 3; flex-basis: 100%; justify-content: center; gap: 10px 16px; }
   }
   .nav-cta {
     font-family: var(--sans); font-weight: 600; font-size: 13px;
@@ -294,6 +294,7 @@
     <a href="#calculators">Calculators</a>
     <a href="#sources">Vendors</a>
     <a href="#call">Book a Call</a>
+    <a href="#coaching">Coaching</a>
   </div>
   <a class="nav-cta" href="https://www.skool.com/peptides-101-9175/about?ref=94d158cb9b9c4572948aa9f240f013f4" target="_blank" rel="noopener noreferrer">Join the Skool →</a>
 </nav>
@@ -331,6 +332,18 @@
       <span class="skool-perk">📞 Just us, no group calls</span>
     </div>
     <a class="btn-primary" href="https://cal.com/jacob-kinkade-k170ix/15min" target="_blank" rel="noopener noreferrer">Book your call →</a>
+  </div>
+
+  <div class="skool-card" id="coaching">
+    <div class="kicker">Go deeper</div>
+    <h2>1:1 Coaching</h2>
+    <p>Want ongoing, hands-on guidance instead of a one-off call? I work directly with a small group of clients on training, protocols, and goals.</p>
+    <div class="skool-perks">
+      <span class="skool-perk">🎯 Personalized protocols</span>
+      <span class="skool-perk">📈 Ongoing check-ins</span>
+      <span class="skool-perk">💬 Direct access to me</span>
+    </div>
+    <a class="btn-primary" href="https://tr.ee/g9_E_QSENP" target="_blank" rel="noopener noreferrer">Apply for coaching →</a>
   </div>
 </div>
 
