@@ -38,6 +38,7 @@
     --accent-dim: #7c5cd6;
     --accent-glow: rgba(167, 139, 250, 0.35);
     --gold: #facc7d;
+    --alert: #ff9966;
     --mono: 'IBM Plex Mono', monospace;
     --sans: 'Inter', sans-serif;
   }
@@ -265,6 +266,75 @@
   .promo-desc { font-size: 12.5px; color: var(--text-dim); margin: 0 0 10px; line-height: 1.4; }
   .promo-cta { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--accent-bright); }
 
+  /* ---- lifting protocol gate ---- */
+  .gate-card {
+    max-width: 440px; margin: 0 auto;
+    background: var(--surface); border: 1px solid var(--border-bright);
+    border-radius: 18px; padding: 26px 24px; text-align: center;
+  }
+  .gate-lock { font-size: 26px; margin-bottom: 6px; }
+  .gate-card h3 { font-size: 17px; margin: 0 0 6px; }
+  .gate-card .gate-sub { font-size: 13px; color: var(--text-dim); margin: 0 0 18px; }
+  .gate-row { display: flex; gap: 10px; }
+  .gate-row input {
+    flex: 1; min-width: 0; background: var(--bg-raised); border: 1px solid var(--border);
+    color: var(--text); font-family: var(--sans); font-size: 15px; font-weight: 600;
+    padding: 12px 14px; border-radius: 10px; text-align: center; letter-spacing: 0.04em;
+  }
+  .gate-row input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .gate-row .btn-primary { padding: 12px 20px; font-size: 13.5px; }
+  .gate-error {
+    margin: 12px 0 0; font-size: 12.5px; color: var(--alert);
+    font-family: var(--mono);
+  }
+  .gate-hint { margin: 16px 0 0; font-size: 12.5px; color: var(--text-faint); }
+  .gate-hint a { color: var(--accent-bright); }
+
+  .protocol-days {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 14px; max-width: 880px; margin: 0 auto;
+  }
+  @media (max-width: 640px) { .protocol-days { grid-template-columns: 1fr; } }
+  .day-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 18px 20px;
+  }
+  .day-card .day-badge {
+    display: inline-block; font-family: var(--mono); font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em; color: #100c1f;
+    background: linear-gradient(135deg, var(--accent-bright), var(--accent-dim));
+    padding: 5px 12px; border-radius: 999px; margin-bottom: 12px;
+  }
+  .ex-row {
+    display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 10px;
+    padding: 8px 0; border-top: 1px solid var(--border);
+  }
+  .ex-row:first-of-type { border-top: none; }
+  .ex-name { font-size: 13.5px; color: var(--text); }
+  .ex-sets { font-family: var(--mono); font-size: 12px; color: var(--text-faint); margin-left: auto; }
+
+  .protocol-note {
+    max-width: 880px; margin: 14px auto 0; font-family: var(--mono); font-size: 12px;
+    color: var(--text-faint); text-align: center;
+  }
+
+  .protocol-volume {
+    max-width: 880px; margin: 26px auto 0;
+    background: var(--bg-raised); border: 1px solid var(--border);
+    border-radius: 16px; padding: 20px;
+  }
+  .protocol-volume h4 {
+    margin: 0 0 14px; font-size: 13px; text-align: center; color: var(--text-dim);
+    font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .volume-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+  .volume-chip {
+    font-family: var(--mono); font-size: 12px; color: var(--text);
+    background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+    padding: 7px 12px; border-radius: 999px;
+  }
+  .volume-chip b { color: var(--accent-bright); }
+
   /* ---- socials ---- */
   .socials-row { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
   .social-card {
@@ -295,6 +365,7 @@
     <a href="#sources">Vendors</a>
     <a href="#call">Book a Call</a>
     <a href="#coaching">Coaching</a>
+    <a href="#protocol">Lift Protocol</a>
   </div>
   <a class="nav-cta" href="https://www.skool.com/peptides-101-9175/about?ref=94d158cb9b9c4572948aa9f240f013f4" target="_blank" rel="noopener noreferrer">Join the Skool →</a>
 </nav>
@@ -430,6 +501,80 @@
   </div>
 </section>
 
+<section class="section" id="protocol">
+  <div class="section-head">
+    <h2>🏋️ My Lifting Protocol</h2>
+    <p>Premium Skool members only. Get the access code from the pinned post.</p>
+  </div>
+
+  <div class="gate-card" id="gateCard">
+    <div class="gate-lock">🔒</div>
+    <h3>Enter your access code</h3>
+    <p class="gate-sub">This is the exact split and weekly volume I run.</p>
+    <div class="gate-row">
+      <input type="password" id="gateInput" placeholder="Access code" autocomplete="off">
+      <button class="btn-primary" id="gateBtn" type="button">Unlock →</button>
+    </div>
+    <p class="gate-error" id="gateError" hidden>That code isn't right — check the pinned post in Skool.</p>
+    <p class="gate-hint">Not a Premium member yet? <a href="https://www.skool.com/peptides-101-9175/about?ref=94d158cb9b9c4572948aa9f240f013f4" target="_blank" rel="noopener noreferrer">Join My Skool →</a></p>
+  </div>
+
+  <div class="protocol-content" id="protocolContent" hidden>
+    <div class="protocol-days">
+      <div class="day-card">
+        <span class="day-badge">Push</span>
+        <div class="ex-row"><span class="ex-name">Horizontal Chest Movement</span><span class="ex-sets">3 × 8–12</span></div>
+        <div class="ex-row"><span class="ex-name">High Incline Press Movement</span><span class="ex-sets">3 × 8–12</span></div>
+        <div class="ex-row"><span class="ex-name">H to L Fly OR Decline Dips</span><span class="ex-sets">3 × 8–12</span></div>
+        <div class="ex-row"><span class="ex-name">Pressdown Tricep Movement</span><span class="ex-sets">4 × 12</span></div>
+        <div class="ex-row"><span class="ex-name">OH Tricep Movement</span><span class="ex-sets">4 × 12</span></div>
+      </div>
+      <div class="day-card">
+        <span class="day-badge">Pull</span>
+        <div class="ex-row"><span class="ex-name">Hinge Movement</span><span class="ex-sets">2 warm-up + 2 working × 6–8</span></div>
+        <div class="ex-row"><span class="ex-name">Chest Supported Row</span><span class="ex-sets">3 × 12–15</span></div>
+        <div class="ex-row"><span class="ex-name">Pulldown Movement</span><span class="ex-sets">3 × 8–12</span></div>
+        <div class="ex-row"><span class="ex-name">Preacher or DB Curl</span><span class="ex-sets">4 × 10–12</span></div>
+        <div class="ex-row"><span class="ex-name">Hammer Curl</span><span class="ex-sets">2 × 8</span></div>
+        <div class="ex-row"><span class="ex-name">Upper Back/Rear Delt</span><span class="ex-sets">3 × 8–10</span></div>
+      </div>
+      <div class="day-card">
+        <span class="day-badge">Legs 1</span>
+        <div class="ex-row"><span class="ex-name">ABD/ADD</span><span class="ex-sets">2 each × 10–12</span></div>
+        <div class="ex-row"><span class="ex-name">RDL/Stiff Leg Movement</span><span class="ex-sets">3 × 6–8</span></div>
+        <div class="ex-row"><span class="ex-name">Leg Press or Squat Movement (Quad)</span><span class="ex-sets">3 × 12–15</span></div>
+        <div class="ex-row"><span class="ex-name">Calf Raise</span><span class="ex-sets">4 × 15</span></div>
+        <div class="ex-row"><span class="ex-name">Lying Hamstring Curl</span><span class="ex-sets">3 × 10–12</span></div>
+        <div class="ex-row"><span class="ex-name">Quad Ext</span><span class="ex-sets">3 × 12–15</span></div>
+      </div>
+      <div class="day-card">
+        <span class="day-badge">Legs 2</span>
+        <div class="ex-row"><span class="ex-name">GHR (Low Back/Glutes)</span><span class="ex-sets">4 × 8–10</span></div>
+        <div class="ex-row"><span class="ex-name">SL Split Squats (Glute Focus)</span><span class="ex-sets">3 × 8–10</span></div>
+        <div class="ex-row"><span class="ex-name">Seated Hamstring Curl</span><span class="ex-sets">4 × 10</span></div>
+        <div class="ex-row"><span class="ex-name">Calf Raise</span><span class="ex-sets">3 × 15</span></div>
+        <div class="ex-row"><span class="ex-name">Glute Kickbacks/Hip Thrust</span><span class="ex-sets">3 × 10</span></div>
+      </div>
+    </div>
+
+    <p class="protocol-note">Plus: 3×20 / 3×10 Lat Raise, 3x/week</p>
+
+    <div class="protocol-volume">
+      <h4>Weekly volume targets</h4>
+      <div class="volume-grid">
+        <span class="volume-chip">Back <b>22/wk</b></span>
+        <span class="volume-chip">Chest <b>18/wk</b></span>
+        <span class="volume-chip">Triceps <b>16/wk</b></span>
+        <span class="volume-chip">Hamstrings <b>10/wk</b></span>
+        <span class="volume-chip">Calves <b>7/wk</b></span>
+        <span class="volume-chip">Quads <b>6/wk</b></span>
+        <span class="volume-chip">Biceps <b>12/wk</b></span>
+        <span class="volume-chip">Shoulders — <b>no set lifts</b>; 6 sets side delts 3x/wk</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section">
   <div class="section-head">
     <h2>Follow along</h2>
@@ -455,6 +600,42 @@
   <span>PYRE — for research &amp; educational purposes only. Not medical advice.</span>
   <span>Some links are affiliate/referral links that support this page at no extra cost to you.</span>
 </footer>
+
+<script>
+  (function () {
+    var CODE = 'fall';
+    var STORAGE_KEY = 'pyre-protocol-unlocked';
+    var gateCard = document.getElementById('gateCard');
+    var content = document.getElementById('protocolContent');
+    var input = document.getElementById('gateInput');
+    var btn = document.getElementById('gateBtn');
+    var error = document.getElementById('gateError');
+
+    function unlock() {
+      gateCard.hidden = true;
+      content.hidden = false;
+      try { sessionStorage.setItem(STORAGE_KEY, '1'); } catch (e) {}
+    }
+
+    function tryCode() {
+      if ((input.value || '').trim().toLowerCase() === CODE) {
+        error.hidden = true;
+        unlock();
+      } else {
+        error.hidden = false;
+      }
+    }
+
+    btn.addEventListener('click', tryCode);
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') tryCode();
+    });
+
+    try {
+      if (sessionStorage.getItem(STORAGE_KEY) === '1') unlock();
+    } catch (e) {}
+  })();
+</script>
 
 </body>
 </html>
