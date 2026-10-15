@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Protocol — PYRE</title>
+<meta name="description" content="My personal lifting split, supplement stack, and compound protocol — Premium Skool members only.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230a0913'/%3E%3Ctext x='50' y='68' font-family='IBM Plex Mono, monospace' font-weight='700' font-size='56' fill='%23c4b5fd' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap');
+
+  :root {
+    --bg: #0a0913;
+    --bg-raised: #13111f;
+    --surface: #17142a;
+    --border: #2b2547;
+    --border-bright: #4c3f82;
+    --text: #ece9f7;
+    --text-dim: #a79fc9;
+    --text-faint: #6f6693;
+    --accent: #a78bfa;
+    --accent-bright: #c4b5fd;
+    --accent-dim: #7c5cd6;
+    --accent-glow: rgba(167, 139, 250, 0.35);
+    --gold: #facc7d;
+    --alert: #ff9966;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'Inter', sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    margin: 0;
+    line-height: 1.5;
+    background:
+      radial-gradient(circle at 18% 6%, rgba(167, 139, 250, 0.16), transparent 42%),
+      radial-gradient(circle at 88% 20%, rgba(124, 92, 214, 0.14), transparent 48%),
+      var(--bg);
+  }
+
+  a { color: var(--accent-bright); text-decoration: none; }
+  a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .nav {
+    max-width: 900px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; padding: 22px 20px 0;
+  }
+  .nav-brand { font-family: var(--mono); font-weight: 700; font-size: 17px; letter-spacing: 0.04em; color: var(--text); }
+  .nav-brand span { color: var(--accent-bright); }
+  .nav-back {
+    font-family: var(--mono); font-size: 12.5px; color: var(--text-dim);
+    border: 1px solid var(--border-bright); padding: 8px 14px; border-radius: 999px;
+  }
+  .nav-back:hover { color: var(--text); text-decoration: none; border-color: var(--accent); }
+
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 20px 80px; }
+
+  .page-head { text-align: center; padding: 36px 0 24px; }
+  .page-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.03em;
+    color: var(--accent-bright);
+    background: rgba(167,139,250,0.08);
+    border: 1px solid var(--border-bright);
+    padding: 7px 14px; border-radius: 999px;
+  }
+  .page-head h1 {
+    font-size: clamp(26px, 5vw, 36px); line-height: 1.15; font-weight: 800;
+    margin: 18px 0 10px;
+  }
+  .page-head p { color: var(--text-dim); font-size: 15px; max-width: 520px; margin: 0 auto; }
+
+  .disclaimer {
+    display: flex; gap: 10px; align-items: flex-start;
+    background: rgba(255,153,102,0.07); border: 1px solid rgba(255,153,102,0.35);
+    border-radius: 14px; padding: 14px 16px; margin-bottom: 28px;
+    font-size: 12.5px; color: var(--text-dim); line-height: 1.5;
+  }
+  .disclaimer b { color: var(--alert); }
+
+  /* ---- gate ---- */
+  .gate-card {
+    max-width: 440px; margin: 0 auto;
+    background: var(--surface); border: 1px solid var(--border-bright);
+    border-radius: 18px; padding: 26px 24px; text-align: center;
+  }
+  .gate-lock { font-size: 26px; margin-bottom: 6px; }
+  .gate-card h3 { font-size: 17px; margin: 0 0 6px; }
+  .gate-card .gate-sub { font-size: 13px; color: var(--text-dim); margin: 0 0 18px; }
+  .gate-row { display: flex; gap: 10px; }
+  .gate-row input {
+    flex: 1; min-width: 0; background: var(--bg-raised); border: 1px solid var(--border);
+    color: var(--text); font-family: var(--sans); font-size: 15px; font-weight: 600;
+    padding: 12px 14px; border-radius: 10px; text-align: center; letter-spacing: 0.04em;
+  }
+  .gate-row input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .btn-primary {
+    display: inline-block;
+    font-family: var(--sans); font-weight: 700; font-size: 14px; color: #100c1f;
+    background: linear-gradient(135deg, var(--accent-bright), var(--accent-dim));
+    padding: 12px 20px; border-radius: 999px; box-shadow: 0 8px 26px var(--accent-glow);
+    white-space: nowrap; border: none; cursor: pointer;
+  }
+  .gate-error {
+    margin: 12px 0 0; font-size: 12.5px; color: var(--alert);
+    font-family: var(--mono);
+  }
+  .gate-hint { margin: 16px 0 0; font-size: 12.5px; color: var(--text-faint); }
+  .gate-hint a { color: var(--accent-bright); }
+
+  /* ---- content sections ---- */
+  .proto-section { margin-top: 50px; }
+  .proto-section:first-of-type { margin-top: 36px; }
+  .proto-section-head { text-align: center; margin-bottom: 22px; }
+  .proto-section-head h2 { font-size: 21px; margin: 0 0 6px; }
+  .proto-section-head p { color: var(--text-dim); font-size: 13.5px; margin: 0; }
+
+  .proto-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 14px; max-width: 880px; margin: 0 auto;
+  }
+  @media (max-width: 640px) { .proto-grid { grid-template-columns: 1fr; } }
+
+  .day-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 18px 20px;
+  }
+  .day-card.full { grid-column: 1 / -1; }
+  .day-card .day-badge {
+    display: inline-block; font-family: var(--mono); font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em; color: #100c1f;
+    background: linear-gradient(135deg, var(--accent-bright), var(--accent-dim));
+    padding: 5px 12px; border-radius: 999px; margin-bottom: 12px;
+  }
+  .ex-row {
+    display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 10px;
+    padding: 8px 0; border-top: 1px solid var(--border);
+  }
+  .ex-row:first-of-type { border-top: none; }
+  .ex-name { font-size: 13.5px; color: var(--text); }
+  .ex-sets { font-family: var(--mono); font-size: 12px; color: var(--text-faint); margin-left: auto; }
+  .ex-notes { display: block; font-size: 11.5px; color: var(--text-faint); margin-top: 1px; }
+
+  .protocol-note {
+    max-width: 880px; margin: 14px auto 0; font-family: var(--mono); font-size: 12px;
+    color: var(--text-faint); text-align: center;
+  }
+
+  .protocol-volume {
+    max-width: 880px; margin: 18px auto 0;
+    background: var(--bg-raised); border: 1px solid var(--border);
+    border-radius: 16px; padding: 20px;
+  }
+  .protocol-volume h4 {
+    margin: 0 0 14px; font-size: 13px; text-align: center; color: var(--text-dim);
+    font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .volume-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+  .volume-chip {
+    font-family: var(--mono); font-size: 12px; color: var(--text);
+    background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+    padding: 7px 12px; border-radius: 999px;
+  }
+  .volume-chip b { color: var(--accent-bright); }
+
+  footer {
+    margin: 60px auto 0; max-width: 900px; padding: 20px 20px 0;
+    border-top: 1px solid var(--border);
+    font-family: var(--mono); font-size: 11px; color: var(--text-faint); text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">PYRE<span>.</span></div>
+  <a class="nav-back" href="index.html">← Back to PYRE</a>
+</nav>
+
+<div class="wrap">
+  <div class="page-head">
+    <span class="page-badge">🔒 Premium Skool members only</span>
+    <h1>My Protocol</h1>
+    <p>My exact lifting split and current supplement/compound protocol — get the access code from the pinned post in Skool.</p>
+  </div>
+
+  <div class="disclaimer">
+    <span>⚠️</span>
+    <span><b>This is my personal protocol — not a recommendation.</b> Shared for educational purposes only. Not medical advice. I am not a doctor. Research compounds are not approved for human use. Always do your own research and talk to a doctor before making any changes to your own training, supplements, or anything else.</span>
+  </div>
+
+  <div class="gate-card" id="gateCard">
+    <div class="gate-lock">🔒</div>
+    <h3>Enter your access code</h3>
+    <p class="gate-sub">Unlocks both my lifting split and my supplement/compound protocol below.</p>
+    <div class="gate-row">
+      <input type="password" id="gateInput" placeholder="Access code" autocomplete="off">
+      <button class="btn-primary" id="gateBtn" type="button">Unlock →</button>
+    </div>
+    <p class="gate-error" id="gateError" hidden>That code isn't right — check the pinned post in Skool.</p>
+    <p class="gate-hint">Not a Premium member yet? <a href="https://www.skool.com/peptides-101-9175/about?ref=94d158cb9b9c4572948aa9f240f013f4" target="_blank" rel="noopener noreferrer">Join My Skool →</a></p>
+  </div>
+
+  <div id="protocolContent" hidden>
+
+    <section class="proto-section">
+      <div class="proto-section-head">
+        <h2>🏋️ My Lifting Protocol</h2>
+        <p>The exact split and weekly volume I run.</p>
+      </div>
+      <div class="proto-grid">
+        <div class="day-card">
+          <span class="day-badge">Push</span>
+          <div class="ex-row"><span class="ex-name">Horizontal Chest Movement</span><span class="ex-sets">3 × 8–12</span></div>
+          <div class="ex-row"><span class="ex-name">High Incline Press Movement</span><span class="ex-sets">3 × 8–12</span></div>
+          <div class="ex-row"><span class="ex-name">H to L Fly OR Decline Dips</span><span class="ex-sets">3 × 8–12</span></div>
+          <div class="ex-row"><span class="ex-name">Pressdown Tricep Movement</span><span class="ex-sets">4 × 12</span></div>
+          <div class="ex-row"><span class="ex-name">OH Tricep Movement</span><span class="ex-sets">4 × 12</span></div>
+        </div>
+        <div class="day-card">
+          <span class="day-badge">Pull</span>
+          <div class="ex-row"><span class="ex-name">Hinge Movement</span><span class="ex-sets">2 warm-up + 2 working × 6–8</span></div>
+          <div class="ex-row"><span class="ex-name">Chest Supported Row</span><span class="ex-sets">3 × 12–15</span></div>
+          <div class="ex-row"><span class="ex-name">Pulldown Movement</span><span class="ex-sets">3 × 8–12</span></div>
+          <div class="ex-row"><span class="ex-name">Preacher or DB Curl</span><span class="ex-sets">4 × 10–12</span></div>
+          <div class="ex-row"><span class="ex-name">Hammer Curl</span><span class="ex-sets">2 × 8</span></div>
+          <div class="ex-row"><span class="ex-name">Upper Back/Rear Delt</span><span class="ex-sets">3 × 8–10</span></div>
+        </div>
+        <div class="day-card">
+          <span class="day-badge">Legs 1</span>
+          <div class="ex-row"><span class="ex-name">ABD/ADD</span><span class="ex-sets">2 each × 10–12</span></div>
+          <div class="ex-row"><span class="ex-name">RDL/Stiff Leg Movement</span><span class="ex-sets">3 × 6–8</span></div>
+          <div class="ex-row"><span class="ex-name">Leg Press or Squat Movement (Quad)</span><span class="ex-sets">3 × 12–15</span></div>
+          <div class="ex-row"><span class="ex-name">Calf Raise</span><span class="ex-sets">4 × 15</span></div>
+          <div class="ex-row"><span class="ex-name">Lying Hamstring Curl</span><span class="ex-sets">3 × 10–12</span></div>
+          <div class="ex-row"><span class="ex-name">Quad Ext</span><span class="ex-sets">3 × 12–15</span></div>
+        </div>
+        <div class="day-card">
+          <span class="day-badge">Legs 2</span>
+          <div class="ex-row"><span class="ex-name">GHR (Low Back/Glutes)</span><span class="ex-sets">4 × 8–10</span></div>
+          <div class="ex-row"><span class="ex-name">SL Split Squats (Glute Focus)</span><span class="ex-sets">3 × 8–10</span></div>
+          <div class="ex-row"><span class="ex-name">Seated Hamstring Curl</span><span class="ex-sets">4 × 10</span></div>
+          <div class="ex-row"><span class="ex-name">Calf Raise</span><span class="ex-sets">3 × 15</span></div>
+          <div class="ex-row"><span class="ex-name">Glute Kickbacks/Hip Thrust</span><span class="ex-sets">3 × 10</span></div>
+        </div>
+      </div>
+
+      <p class="protocol-note">Plus: 3×20 / 3×10 Lat Raise, 3x/week</p>
+
+      <div class="protocol-volume">
+        <h4>Weekly volume targets</h4>
+        <div class="volume-grid">
+          <span class="volume-chip">Back <b>22/wk</b></span>
+          <span class="volume-chip">Chest <b>18/wk</b></span>
+          <span class="volume-chip">Triceps <b>16/wk</b></span>
+          <span class="volume-chip">Hamstrings <b>10/wk</b></span>
+          <span class="volume-chip">Calves <b>7/wk</b></span>
+          <span class="volume-chip">Quads <b>6/wk</b></span>
+          <span class="volume-chip">Biceps <b>12/wk</b></span>
+          <span class="volume-chip">Shoulders — <b>no set lifts</b>; 6 sets side delts 3x/wk</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="proto-section">
+      <div class="proto-section-head">
+        <h2>💊 My Supplements &amp; Protocol</h2>
+        <p>What I'm currently running — compounds, doses, and timing.</p>
+      </div>
+      <div class="proto-grid">
+        <div class="day-card full">
+          <span class="day-badge">Daily Protocol</span>
+          <div class="ex-row"><span class="ex-name">Testosterone Enanthate</span><span class="ex-sets">400mg — daily pin</span></div>
+          <div class="ex-row"><span class="ex-name">HGH</span><span class="ex-sets">4iu — PM, daily</span></div>
+          <div class="ex-row"><span class="ex-name">HCG</span><span class="ex-sets">250iu — 3x/wk</span></div>
+          <div class="ex-row"><span class="ex-name">Retatrutide</span><span class="ex-sets">0.75mg — 2x/wk</span></div>
+          <div class="ex-row"><span class="ex-name">BPC-157</span><span class="ex-sets">500mcg — daily</span></div>
+          <div class="ex-row"><span class="ex-name">GHK-Cu</span><span class="ex-sets">2mg — daily</span></div>
+          <div class="ex-row"><span class="ex-name">Glutathione</span><span class="ex-sets">100mg — 3x/wk</span></div>
+          <div class="ex-row"><span class="ex-name">SLU-PP-332</span><span class="ex-sets">200–300mg — daily</span></div>
+          <div class="ex-row"><span class="ex-name">MOTS-c</span><span class="ex-sets">—</span></div>
+          <div class="ex-row"><span class="ex-name">KX-826</span><span class="ex-sets">—</span></div>
+          <div class="ex-row"><span class="ex-name">Arimidex (Anastrozole)</span><span class="ex-sets">0.5mg — 2x/wk</span></div>
+        </div>
+
+        <div class="day-card">
+          <span class="day-badge">Tendon Repair Protocol</span>
+          <div class="ex-row"><span class="ex-name">GHK-Cu</span><span class="ex-sets">4mg — 6 wks</span></div>
+          <div class="ex-row"><span class="ex-name">BPC-157<span class="ex-notes">Pin with HGH</span></span><span class="ex-sets">1mg — 6 wks</span></div>
+          <div class="ex-row"><span class="ex-name">GH</span><span class="ex-sets">4iu</span></div>
+        </div>
+
+        <div class="day-card">
+          <span class="day-badge">Test E Titration History</span>
+          <div class="ex-row"><span class="ex-name">7/13 – 7/24</span><span class="ex-sets">175mg</span></div>
+          <div class="ex-row"><span class="ex-name">7/25 – 9/25</span><span class="ex-sets">250mg</span></div>
+          <div class="ex-row"><span class="ex-name">9/26 – present</span><span class="ex-sets">400mg</span></div>
+        </div>
+
+        <div class="day-card full">
+          <span class="day-badge">Ancillaries</span>
+          <div class="ex-row"><span class="ex-name">NAC</span><span class="ex-sets">1200mg — PM</span></div>
+          <div class="ex-row"><span class="ex-name">Omega-3</span><span class="ex-sets">4 caps — 2 AM + 2 PM</span></div>
+          <div class="ex-row"><span class="ex-name">D3/K2</span><span class="ex-sets">1 cap — PM</span></div>
+          <div class="ex-row"><span class="ex-name">TUDCA</span><span class="ex-sets">2 caps — AM &amp; PM</span></div>
+          <div class="ex-row"><span class="ex-name">Taurine</span><span class="ex-sets">6g — 3g AM + 3g PM</span></div>
+          <div class="ex-row"><span class="ex-name">Creatine</span><span class="ex-sets">10g — AM</span></div>
+          <div class="ex-row"><span class="ex-name">Magnesium Glycinate</span><span class="ex-sets">6 caps — 2 caps, 3x/day</span></div>
+          <div class="ex-row"><span class="ex-name">Astragalus Root</span><span class="ex-sets">550mg — 1 cap, 2x/day</span></div>
+          <div class="ex-row"><span class="ex-name">Differin Gel (Adapalene 0.1%)</span><span class="ex-sets">Small amount — daily</span></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<footer>PYRE — for research &amp; educational purposes only. Not medical advice.</footer>
+
+<script>
+  (function () {
+    var CODE = 'fall';
+    var STORAGE_KEY = 'pyre-myprotocol-unlocked';
+    var gateCard = document.getElementById('gateCard');
+    var content = document.getElementById('protocolContent');
+    var input = document.getElementById('gateInput');
+    var btn = document.getElementById('gateBtn');
+    var error = document.getElementById('gateError');
+
+    function unlock() {
+      gateCard.hidden = true;
+      content.hidden = false;
+      try { sessionStorage.setItem(STORAGE_KEY, '1'); } catch (e) {}
+    }
+
+    function tryCode() {
+      if ((input.value || '').trim().toLowerCase() === CODE) {
+        error.hidden = true;
+        unlock();
+      } else {
+        error.hidden = false;
+      }
+    }
+
+    btn.addEventListener('click', tryCode);
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') tryCode();
+    });
+
+    try {
+      if (sessionStorage.getItem(STORAGE_KEY) === '1') unlock();
+    } catch (e) {}
+  })();
+</script>
+
+</body>
+</html>
