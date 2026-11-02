@@ -200,72 +200,6 @@
   .source-tag { font-size: 12px; color: var(--text-faint); }
   .source-arrow { margin-left: auto; color: var(--text-faint); font-size: 15px; }
 
-  /* ---- promotions ---- */
-  .promos-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 300px));
-    justify-content: center; align-items: start; gap: 16px;
-    max-width: 1000px; margin: 0 auto;
-  }
-  @media (max-width: 600px) { .promos-grid { grid-template-columns: 1fr; max-width: 420px; } }
-
-  .promo-card {
-    display: block; background: var(--surface); border: 1px solid var(--border);
-    border-radius: 16px; overflow: hidden;
-    transition: border-color 0.15s, transform 0.15s;
-  }
-  .promo-card:hover { border-color: var(--accent-dim); transform: translateY(-2px); }
-  .promo-card img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; background: var(--bg-raised); }
-  .promo-card img.natural { aspect-ratio: auto; height: auto; }
-
-  .promo-banner {
-    width: 100%; aspect-ratio: 4 / 5;
-    background:
-      radial-gradient(circle at 24% 18%, rgba(167,139,250,0.35), transparent 55%),
-      radial-gradient(circle at 80% 85%, rgba(124,92,214,0.30), transparent 55%),
-      var(--bg-raised);
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 14px; padding: 20px; text-align: center;
-  }
-  .promo-banner .promo-banner-mark {
-    display: flex; flex-direction: column; align-items: center; gap: 6px;
-  }
-  .promo-banner .promo-banner-mark span {
-    font-family: var(--mono); font-weight: 700; font-size: 22px; letter-spacing: 0.04em;
-    color: var(--text);
-  }
-  .promo-banner .promo-banner-mark .bar {
-    width: 56px; height: 3px; border-radius: 2px;
-    background: linear-gradient(90deg, #ff4d4d, #7c3aed);
-  }
-  .promo-banner .promo-banner-pct {
-    font-size: 54px; font-weight: 800; line-height: 1;
-    background: linear-gradient(135deg, var(--accent-bright), var(--gold));
-    -webkit-background-clip: text; background-clip: text; color: transparent;
-  }
-  .promo-banner .promo-banner-label {
-    font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
-    color: var(--text-dim);
-  }
-  .promo-banner .promo-banner-logo-img { width: 76px; height: 76px; }
-  .promo-banner .promo-banner-logo-img img { width: 100%; height: 100%; object-fit: contain; }
-  .promo-banner .promo-banner-code {
-    font-family: var(--mono); font-weight: 700; font-size: 13px; letter-spacing: 0.04em;
-    color: var(--text);
-    background: rgba(255,255,255,0.06); border: 1px solid var(--border-bright);
-    padding: 5px 12px; border-radius: 999px;
-  }
-  .promo-banner .promo-banner-code b { color: var(--accent-bright); }
-  .promo-card-body { padding: 14px 16px 16px; }
-  .promo-card-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
-  .promo-name { font-weight: 600; font-size: 14.5px; color: var(--text); }
-  .promo-expiry {
-    font-family: var(--mono); font-size: 10px; color: var(--accent-bright);
-    background: rgba(167,139,250,0.08); border: 1px solid var(--border-bright);
-    padding: 3px 8px; border-radius: 999px; white-space: nowrap;
-  }
-  .promo-desc { font-size: 12.5px; color: var(--text-dim); margin: 0 0 10px; line-height: 1.4; }
-  .promo-cta { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--accent-bright); }
-
   /* ---- socials ---- */
   .socials-row { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
   .social-card {
@@ -291,7 +225,6 @@
 <nav class="nav">
   <div class="nav-brand">PYRE<span>.</span></div>
   <div class="nav-links">
-    <a href="#promos">Deals</a>
     <a href="#sources">Vendors</a>
     <a href="#call">Book a Call</a>
     <a href="#coaching">Coaching</a>
@@ -347,37 +280,6 @@
     <a class="btn-primary" href="https://tr.ee/g9_E_QSENP" target="_blank" rel="noopener noreferrer">Apply for coaching →</a>
   </div>
 </div>
-
-<section class="section" id="promos">
-  <div class="section-head">
-    <h2>🔥 Current promotions</h2>
-    <p>Live sales from my sourcing partners — updated as they drop.</p>
-  </div>
-  <div class="promos-grid">
-    <a class="promo-card" href="https://peptira.com/?ref=PYRE" target="_blank" rel="noopener noreferrer">
-      <img class="natural" src="promos/peptira-halloween-50off.jpg" alt="Peptira Halloween Sale — up to 50% off sitewide: 35% off sitewide, plus 10% with code PYRE, plus 5% with ACH. First 200 orders over $500 get a free limited-edition Halloween peptide case." loading="lazy">
-      <div class="promo-card-body">
-        <div class="promo-card-top">
-          <span class="promo-name">Peptira</span>
-          <span class="promo-expiry">Oct 23 – Oct 31</span>
-        </div>
-        <p class="promo-desc">Halloween Sale — up to 50% off sitewide: 35% off + 10% off with code <strong>PYRE</strong> + 5% off with ACH. First 200 orders over $500 get a free limited-edition Halloween peptide case.</p>
-        <span class="promo-cta">Shop the sale →</span>
-      </div>
-    </a>
-    <a class="promo-card" href="https://modifiedaminos.shop/?ref=imhecohr" target="_blank" rel="noopener noreferrer">
-      <img class="natural" src="promos/modifiedaminos-glp-sale.jpg" alt="Modified Aminos GLP Sale — all three GLPs (MA-1S, MA-2TZ, MA-3R) 20% off, stacks with affiliate codes and ACH for up to 50% off total" loading="lazy">
-      <div class="promo-card-body">
-        <div class="promo-card-top">
-          <span class="promo-name">Modified Aminos</span>
-          <span class="promo-expiry">Ends Sun Oct 25</span>
-        </div>
-        <p class="promo-desc">GLP Sale — all three GLPs (MA-1S, MA-2TZ, MA-3R) 20% off, stacks with code <strong>PYRE</strong> and an additional 10% off with ACH for up to 50% off total.</p>
-        <span class="promo-cta">Shop the sale →</span>
-      </div>
-    </a>
-  </div>
-</section>
 
 <section class="section" id="sources">
   <div class="section-head">
