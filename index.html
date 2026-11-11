@@ -200,6 +200,34 @@
   .source-tag { font-size: 12px; color: var(--text-faint); }
   .source-arrow { margin-left: auto; color: var(--text-faint); font-size: 15px; }
 
+  /* ---- promotions ---- */
+  .promos-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 300px));
+    justify-content: center; align-items: start; gap: 16px;
+    max-width: 1000px; margin: 0 auto;
+  }
+  @media (max-width: 600px) { .promos-grid { grid-template-columns: 1fr; max-width: 420px; } }
+
+  .promo-card {
+    display: block; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; overflow: hidden;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+  .promo-card:hover { border-color: var(--accent-dim); transform: translateY(-2px); }
+  .promo-card img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; background: var(--bg-raised); }
+  .promo-card img.natural { aspect-ratio: auto; height: auto; }
+
+  .promo-card-body { padding: 14px 16px 16px; }
+  .promo-card-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
+  .promo-name { font-weight: 600; font-size: 14.5px; color: var(--text); }
+  .promo-expiry {
+    font-family: var(--mono); font-size: 10px; color: var(--accent-bright);
+    background: rgba(167,139,250,0.08); border: 1px solid var(--border-bright);
+    padding: 3px 8px; border-radius: 999px; white-space: nowrap;
+  }
+  .promo-desc { font-size: 12.5px; color: var(--text-dim); margin: 0 0 10px; line-height: 1.4; }
+  .promo-cta { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--accent-bright); }
+
   /* ---- socials ---- */
   .socials-row { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
   .social-card {
@@ -225,6 +253,7 @@
 <nav class="nav">
   <div class="nav-brand">PYRE<span>.</span></div>
   <div class="nav-links">
+    <a href="#promos">Deals</a>
     <a href="#sources">Vendors</a>
     <a href="#call">Book a Call</a>
     <a href="#coaching">Coaching</a>
@@ -280,6 +309,37 @@
     <a class="btn-primary" href="https://tr.ee/g9_E_QSENP" target="_blank" rel="noopener noreferrer">Apply for coaching →</a>
   </div>
 </div>
+
+<section class="section" id="promos">
+  <div class="section-head">
+    <h2>🔥 Current promotions</h2>
+    <p>Live sales from my sourcing partners — updated as they drop.</p>
+  </div>
+  <div class="promos-grid">
+    <a class="promo-card" href="https://modifiedaminos.shop/?ref=imhecohr" target="_blank" rel="noopener noreferrer">
+      <img class="natural" src="promos/modifiedaminos-veterans-day-sale.jpg" alt="Modified Aminos Veterans Day Sale — ATX-304 buy 2 get 1 free, CJC/Ipa Blend buy 1 get 1 free, extra 10% off with ACH and affiliate codes stacked" loading="lazy">
+      <div class="promo-card-body">
+        <div class="promo-card-top">
+          <span class="promo-name">Modified Aminos</span>
+          <span class="promo-expiry">Nov 11 – Nov 12</span>
+        </div>
+        <p class="promo-desc">Veterans Day Sale — ATX-304 buy 2 get 1 free, CJC/Ipa Blend buy 1 get 1 free. Extra 10% off stacked with code <strong>PYRE</strong> and ACH checkout.</p>
+        <span class="promo-cta">Shop the sale →</span>
+      </div>
+    </a>
+    <a class="promo-card" href="https://peptira.com/?ref=PYRE" target="_blank" rel="noopener noreferrer">
+      <img class="natural" src="promos/peptira-bogo-sale.jpg" alt="Peptira Buy One Get One on select items — SEMA-1, TIRZ-2, RETA-3, Survodutide — November 11 to 13" loading="lazy">
+      <div class="promo-card-body">
+        <div class="promo-card-top">
+          <span class="promo-name">Peptira</span>
+          <span class="promo-expiry">Nov 11 – Nov 13</span>
+        </div>
+        <p class="promo-desc">Buy One, Get One on select items — SEMA-1, TIRZ-2, RETA-3 &amp; Survodutide.</p>
+        <span class="promo-cta">Shop the sale →</span>
+      </div>
+    </a>
+  </div>
+</section>
 
 <section class="section" id="sources">
   <div class="section-head">
